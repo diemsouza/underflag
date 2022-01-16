@@ -1,0 +1,85 @@
+[
+    {
+        "key": "test-a",
+        "value": true,
+        "description": "The description is optional"
+    },
+    {
+        "key": "test-b",
+        "value": false
+    },
+    {
+        "key": "test-c",
+        "value": 1
+    },
+    {
+        "key": "test-d",
+        "value": 0
+    },
+    {
+        "key": "test-e",
+        "value": "true"
+    },
+    {
+        "key": "test-f",
+        "value": "false"
+    },
+    {
+        "key": "test-g",
+        "value": "1"
+    },
+    {
+        "key": "test-h",
+        "value": "0"
+    },
+    {
+        "key": "test-i",
+        "value": "on"
+    },
+    {
+        "key": "test-j",
+        "value": "off"
+    },
+    {
+        "key": "test-k",
+        "value": "t"
+    },
+    {
+        "key": "test-l",
+        "value": "f"
+    },
+    {
+        "key": "test-m",
+        "value": "y"
+    },
+    {
+        "key": "test-n",
+        "value": "n"
+    },
+    {
+        "key": "test-o",
+        "value": "yes"
+    },
+    {
+        "key": "test-p",
+        "value": "no"
+    },
+    {
+        "key": "test-q",
+        "value": {
+            "q1": 1,
+            "q2": 2
+        }
+    },
+    {
+        "key": "test-r",
+        "value": [
+            1,
+            2
+        ]
+    },
+    {
+        "key": "test-s",
+        "value": null
+    }
+]
