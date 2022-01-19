@@ -54,6 +54,7 @@ if (await underflag.isOn("feature")) {
 - [MySQL] (https://www.npmjs.com/package/underflag-mysql)
 - [PostgreSQL] (https://www.npmjs.com/package/underflag-postgresql)
 - [DynamoDB] (https://www.npmjs.com/package/underflag-dynamodb)
+- [Firebase Remote Config - Admin] (https://www.npmjs.com/package/underflag-firebase-admin)
 
 ## The possible flow using memory + cache + data providers
 
