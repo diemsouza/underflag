@@ -1,85 +1,85 @@
 [
     {
-        "key": "test-a",
+        "key": "test_a",
         "value": true,
         "description": "The description is optional"
     },
     {
-        "key": "test-b",
+        "key": "test_b",
         "value": false
     },
     {
-        "key": "test-c",
+        "key": "test_c",
         "value": 1
     },
     {
-        "key": "test-d",
+        "key": "test_d",
         "value": 0
     },
     {
-        "key": "test-e",
+        "key": "test_e",
         "value": "true"
     },
     {
-        "key": "test-f",
+        "key": "test_f",
         "value": "false"
     },
     {
-        "key": "test-g",
+        "key": "test_g",
         "value": "1"
     },
     {
-        "key": "test-h",
+        "key": "test_h",
         "value": "0"
     },
     {
-        "key": "test-i",
+        "key": "test_i",
         "value": "on"
     },
     {
-        "key": "test-j",
+        "key": "test_j",
         "value": "off"
     },
     {
-        "key": "test-k",
+        "key": "test_k",
         "value": "t"
     },
     {
-        "key": "test-l",
+        "key": "test_l",
         "value": "f"
     },
     {
-        "key": "test-m",
+        "key": "test_m",
         "value": "y"
     },
     {
-        "key": "test-n",
+        "key": "test_n",
         "value": "n"
     },
     {
-        "key": "test-o",
+        "key": "test_o",
         "value": "yes"
     },
     {
-        "key": "test-p",
+        "key": "test_p",
         "value": "no"
     },
     {
-        "key": "test-q",
+        "key": "test_q",
         "value": {
             "q1": 1,
             "q2": 2
         }
     },
     {
-        "key": "test-r",
+        "key": "test_r",
         "value": [
             1,
             2
         ]
     },
     {
-        "key": "test-s",
+        "key": "test_s",
         "value": null
     }
 ]

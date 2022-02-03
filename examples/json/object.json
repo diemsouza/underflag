@@ -1,23 +1,23 @@
 {
-    "test-a": true,
-    "test-b": false,
-    "test-c": 1,
-    "test-d": 0,
-    "test-e": "true",
-    "test-f": "false",
-    "test-g": "1",
-    "test-h": "0",
-    "test-i": "on",
-    "test-j": "off",
-    "test-k": "t",
-    "test-l": "f",
-    "test-m": "y",
-    "test-n": "n",
-    "test-o": "yes",
-    "test-p": "no",
-    "test-q": {
+    "test_a": true,
+    "test_b": false,
+    "test_c": 1,
+    "test_d": 0,
+    "test_e": "true",
+    "test_f": "false",
+    "test_g": "1",
+    "test_h": "0",
+    "test_i": "on",
+    "test_j": "off",
+    "test_k": "t",
+    "test_l": "f",
+    "test_m": "y",
+    "test_n": "n",
+    "test_o": "yes",
+    "test_p": "no",
+    "test_q": {
         "q1": 1,
         "q2": 2
     },
-    "test-r": null
+    "test_r": null
 }

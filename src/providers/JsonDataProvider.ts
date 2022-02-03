@@ -1,6 +1,5 @@
 import { IDataProvider } from '../providers';
 import { DataModel } from '../models';
-import fs from 'fs';
 
 interface KeyValue {
     [key: string]: any;
@@ -8,27 +7,14 @@ interface KeyValue {
 
 interface Options {
     /** Accept a object json data like key: value or a array with DataModel item */
-    data?: KeyValue | DataModel[],
-    /** A filename of json with key: value or a array with DataModel item */
-    file?: string
+    data: KeyValue | DataModel[]
 };
 
 export class JsonDataProvider implements IDataProvider {
     private data: KeyValue | DataModel[] = {};
 
     constructor(options: Options) {
-        if (options.file) {
-            this.loadFromFile(options.file);
-        } else if (options.data) {
-            this.data = options.data;
-        }
-    }
-
-    private loadFromFile(file?: string) {
-        if (file) {
-            const rawdata = fs.readFileSync(file);
-            this.data = JSON.parse(rawdata.toString());
-        }
+        this.data = options.data;
     }
 
     async getAll(): Promise<DataModel[]> {
