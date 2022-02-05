@@ -2,44 +2,37 @@ import { IDataProvider } from '../providers';
 import { DataModel } from '../models';
 import { KeyValueType } from '../types';
 
-interface Options {
+interface JsonDataProviderOptions {
     /** Accept a object json data like key: value or a array with DataModel item */
-    data: KeyValueType | DataModel[]
+    data: KeyValueType | KeyValueType[]
 };
 
 export class JsonDataProvider implements IDataProvider {
-    private data: KeyValueType | DataModel[] = {};
+    private data: DataModel[] = [];
 
-    constructor(options: Options) {
-        this.data = options.data;
+    constructor(options: JsonDataProviderOptions) {
+        if (options.data instanceof Array) {
+            this.data = (options.data as KeyValueType[])
+                .filter(a => a.key)
+                .map(a => ({
+                    key: a.key,
+                    value: a.value,
+                    description: a.description
+                })) as DataModel[];
+        } else {
+            const keys = Object.keys(options.data);
+            this.data = keys.map(key => ({
+                key,
+                value: (options.data as KeyValueType)[key]
+            })) as DataModel[];
+        }
     }
 
     async getAll(): Promise<DataModel[]> {
-        if (this.data) {
-            if (this.data instanceof Array) {
-                return this.data;
-            } else {
-                const keys = Object.keys(this.data);
-                return keys.map(key => ({ key, value: (this.data as KeyValueType)[key] }))
-            }
-        }
-        return [];
+        return this.data;
     }
 
     async get(key: string): Promise<DataModel | undefined> {
-        if (this.data) {
-            if (this.data instanceof Array) {
-                const data = (this.data as DataModel[]).find(a => a.key === key);
-                if (data) {
-                    return data;
-                }
-            } else {
-                const objValue = (this.data as KeyValueType)[key];
-                if (objValue !== undefined) {
-                    return { key, value: objValue };
-                }
-            }
-        }
-        return undefined;
+        return this.data.find(a => a.key === key);
     }
 }

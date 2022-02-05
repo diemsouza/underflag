@@ -14,9 +14,6 @@ const print = async (underflag: Underflag, key: string) => {
 };
 
 (async () => {
-    // load json from file
-    // const file = `${__dirname}${path.sep}array.json`;
-
     // use data provider
     const dataProvider = new JsonDataProvider({ data: arrData });
     const underflag = new Underflag({ dataProvider });

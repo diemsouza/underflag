@@ -30,9 +30,6 @@ const printAll = async (underflag: Underflag) => {
         memoryProvider: new MemoryProvider({ lifetime: 3 })
     });
 
-    // load all features from data provider to memory
-    // await underflag.loadMemory();
-
     // check feature flags
     console.log('from data...');
     await printAll(underflag);

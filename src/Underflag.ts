@@ -1,10 +1,11 @@
-import { IDataProvider, ICacheProvider, IMemoryProvider } from "./providers";
-import { isOn, isOff } from "./utils";
-import { ValueModel, DataModel, CacheModel, MemoryModel } from "./models";
-import { DataValueType } from "./types";
-import { ProviderEnum } from "./enums";
+import {
+    IDataProvider, ICacheProvider, IMemoryProvider,
+    DataValueType, ValueModel,
+    DataModel, CacheModel, MemoryModel,
+    isOn, isOff, ProviderEnum
+} from ".";
 
-interface Options {
+interface UnderflagOptions {
     dataProvider: IDataProvider
     cacheProvider?: ICacheProvider
     memoryProvider?: IMemoryProvider
@@ -20,7 +21,7 @@ export class Underflag {
     private cacheProvider?: ICacheProvider;
     private memoryProvider?: IMemoryProvider;
 
-    constructor(options: Options) {
+    constructor(options: UnderflagOptions) {
         this.dataProvider = options.dataProvider;
         this.cacheProvider = options.cacheProvider;
         this.memoryProvider = options.memoryProvider;
