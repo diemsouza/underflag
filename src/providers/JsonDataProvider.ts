@@ -1,17 +1,14 @@
 import { IDataProvider } from '../providers';
 import { DataModel } from '../models';
-
-interface KeyValue {
-    [key: string]: any;
-};
+import { KeyValueType } from '../types';
 
 interface Options {
     /** Accept a object json data like key: value or a array with DataModel item */
-    data: KeyValue | DataModel[]
+    data: KeyValueType | DataModel[]
 };
 
 export class JsonDataProvider implements IDataProvider {
-    private data: KeyValue | DataModel[] = {};
+    private data: KeyValueType | DataModel[] = {};
 
     constructor(options: Options) {
         this.data = options.data;
@@ -23,7 +20,7 @@ export class JsonDataProvider implements IDataProvider {
                 return this.data;
             } else {
                 const keys = Object.keys(this.data);
-                return keys.map(key => ({ key, value: (this.data as KeyValue)[key] }))
+                return keys.map(key => ({ key, value: (this.data as KeyValueType)[key] }))
             }
         }
         return [];
@@ -37,7 +34,7 @@ export class JsonDataProvider implements IDataProvider {
                     return data;
                 }
             } else {
-                const objValue = (this.data as KeyValue)[key];
+                const objValue = (this.data as KeyValueType)[key];
                 if (objValue !== undefined) {
                     return { key, value: objValue };
                 }

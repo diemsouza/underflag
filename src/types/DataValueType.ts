@@ -1,1 +1,3 @@
-export type DataValueType = any;
+import { ValueType, KeyValueType } from '.';
+
+export type DataValueType = ValueType | KeyValueType;

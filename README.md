@@ -47,14 +47,17 @@ if (await underflag.isOn("feature")) {
 
 ## Others providers
 
-- [MongoDB] (https://www.npmjs.com/package/underflag-mongodb)
-- [Mongoose] (https://www.npmjs.com/package/underflag-mongoose)
-- [Redis] (https://www.npmjs.com/package/underflag-redis)
-- [Memcached] (https://www.npmjs.com/package/underflag-memcached)
-- [MySQL] (https://www.npmjs.com/package/underflag-mysql)
-- [PostgreSQL] (https://www.npmjs.com/package/underflag-postgresql)
-- [DynamoDB] (https://www.npmjs.com/package/underflag-dynamodb)
-- [Firebase Remote Config - Admin] (https://www.npmjs.com/package/underflag-firebase-admin)
+Provider | Package | Use
+--- | --- | ---
+HTTP | https://www.npmjs.com/package/underflag-http | Server or Client
+MongoDB | https://www.npmjs.com/package/underflag-mongodb | Server
+Mongoose | https://www.npmjs.com/package/underflag-mongoose | Server
+Redis | https://www.npmjs.com/package/underflag-redis | Server
+Memcached | https://www.npmjs.com/package/underflag-memcached | Server
+MySQL | https://www.npmjs.com/package/underflag-mysql | Server
+PostgreSQL | https://www.npmjs.com/package/underflag-postgresql | Server
+DynamoDB | https://www.npmjs.com/package/underflag-dynamodb | Server
+Firebase Remote Config - Admin | https://www.npmjs.com/package/underflag-firebase-admin | Server
 
 ## The possible flow using memory + cache + data providers
 
