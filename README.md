@@ -33,17 +33,26 @@ yarn add underflag
 
 Import the underflag and prepare to load data from some provider
 
+_Using implicit json data provider_
+```js
+import { Underflag } from "underflag";
+
+const data = { test_a: true, test_b: false };
+const underflag = new Underflag({ dataProvider: data });
+
+if (await underflag.isOn("test_a")) {
+    // ...
+}
+```
+
+_Using explicit json data provider_
+
 ```js
 import { Underflag, JsonDataProvider } from "underflag";
 
-const dataProvider = new JsonDataProvider({ "feature": true });
+const dataProvider = new JsonDataProvider({ "test_a": true });
 const underflag = new Underflag({ dataProvider });
-
-if (await underflag.isOn("feature")) {
-    // ...
-}
-
-```
+````
 
 ## Others providers
 
@@ -70,25 +79,18 @@ Firebase Remote Config - Admin | https://www.npmjs.com/package/underflag-firebas
 ### Using data provider with **Memory** provider
 
 ```js
-import { Underflag, JsonDataProvider, MemoryProvider } from "underflag"; 
+import { Underflag, MemoryProvider } from "underflag"; 
 
 (async() => {
-    // json data provider
-    const data = {
-        "sign_in": true,
-        "sign_in_notification": true,
-        "min_age": 18 
-    };
-    const dataProvider = new JsonDataProvider();
     // memory provider
     const memoryProvider = new MemoryProvider({ lifetime: 5 });
 
-    const underflag = new Underflag({ dataProvider, memoryProvider });
+    const underflag = new Underflag({ dataProvider: data, memoryProvider });
     
-    await underflag.isOn('feature'); // get from data provider and load memory
-    await underflag.isOn('feature'); // get from memory provider
+    await underflag.isOn('test_a'); // get from data provider and load memory
+    await underflag.isOn('test_a'); // get from memory provider
     // after 5seg
-    await underflag.isOn('feature'); // get from data provider and load memory again
+    await underflag.isOn('test_a'); // get from data provider and load memory again
 })();
 ```
 
@@ -96,28 +98,28 @@ If you prefer, you can load all features from data provider to memory.
 
 ```js
 await underflag.loadMemory();
-await underflag.isOn("feature"); // from memory
+await underflag.isOn("test_a"); // from memory
 await underflag.flushMemory(); // reset memory
 ```
 
 Check the feature status:
 
 ```js
-const isOn = await underflag.isOn("feature"); // return true or false
-const isOff = await underflag.isOff("feature"); // return true or false
+const isOn = await underflag.isOn("test_a"); // return true or false
+const isOff = await underflag.isOff("test_a"); // return true or false
 ```
 
 Get the feature data with key, value and origin (memory, cache or data):
 
 ```js
-const data = await underflag.get("feature");
+const data = await underflag.get("test_a");
 console.log(data); // return undefined or feature object
 ```
 
 Get the feature value:
 
 ```js
-const value = await underflag.getValue("feature");
+const value = await underflag.getValue("test_a");
 console.log(data); // return null or feature value
 ```
 

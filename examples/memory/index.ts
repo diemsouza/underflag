@@ -1,7 +1,6 @@
 import { Underflag, isOn } from '../../src';
 import { JsonDataProvider, MemoryProvider } from '../../src/providers';
 import objData from '../json/object.json';
-import arrData from '../json/array.json';
 
 const print = async (underflag: Underflag, key: string) => {
     const data = await underflag.get(key);
@@ -26,7 +25,7 @@ const printAll = async (underflag: Underflag) => {
 (async () => {
     // use memory provider
     const underflag = new Underflag({
-        dataProvider: new JsonDataProvider({ data: arrData }),
+        dataProvider: new JsonDataProvider({ data: objData }),
         memoryProvider: new MemoryProvider({ lifetime: 3 })
     });
 

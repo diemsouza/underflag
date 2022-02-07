@@ -8,113 +8,97 @@ describe('Underflag', () => {
     describe('Get feature status', () => {
 
         test('should return flag on for feature true', async () => {
-            const data = { test: true };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: true };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOn('test')).resolves.toBeTruthy();
         });
 
         test('should return flag off for feature false', async () => {
-            const data = { test: false };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: false };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOff('test')).resolves.toBeTruthy();
         });
 
         test('should return flag on for feature 1', async () => {
-            const data = { test: 1 };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: 1 };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOn('test')).resolves.toBeTruthy();
         });
 
         test('should return flag off for feature 0', async () => {
-            const data = { test: 0 };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: 0 };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOff('test')).resolves.toBeTruthy();
         });
 
         test('should return flag on for feature "1"', async () => {
-            const data = { test: "1" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "1" };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOn('test')).resolves.toBeTruthy();
         });
 
         test('should return flag off for feature "0"', async () => {
-            const data = { test: "0" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "0" };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOff('test')).resolves.toBeTruthy();
         });
 
         test('should return flag on for feature "on"', async () => {
-            const data = { test: 'on' };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: 'on' };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOn('test')).resolves.toBeTruthy();
         });
 
         test('should return flag off for feature "off"', async () => {
-            const data = { test: 'off' };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: 'off' };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOff('test')).resolves.toBeTruthy();
         });
 
         test('should return flag on for feature "t"', async () => {
-            const data = { test: "t" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "t" };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOn('test')).resolves.toBeTruthy();
         });
 
         test('should return flag off for feature "f"', async () => {
-            const data = { test: "f" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "f" };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOff('test')).resolves.toBeTruthy();
         });
 
         test('should return flag on for feature "y"', async () => {
-            const data = { test: "y" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "y" };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOn('test')).resolves.toBeTruthy();
         });
 
         test('should return flag off for feature "n"', async () => {
-            const data = { test: "n" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "n" };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOff('test')).resolves.toBeTruthy();
         });
 
         test('should return flag on for feature "yes"', async () => {
-            const data = { test: "yes" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "yes" };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOn('test')).resolves.toBeTruthy();
         });
 
         test('should return flag off for feature "no"', async () => {
-            const data = { test: "no" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "no" };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOff('test')).resolves.toBeTruthy();
         });
 
         test('should return flag off for feature null', async () => {
-            const data = { test: null };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: null };
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOff('test')).resolves.toBeTruthy();
         });
 
         test('should return flag off for feature undefined', async () => {
-            const data = {};
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = {};
             const underflag = new Underflag({ dataProvider });
             await expect(underflag.isOff('test')).resolves.toBeTruthy();
         });
@@ -123,8 +107,7 @@ describe('Underflag', () => {
     describe('Get feature value', () => {
 
         test('should return boolean true for feature true', async () => {
-            const data = { test: true };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: true };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -132,8 +115,7 @@ describe('Underflag', () => {
         });
 
         test('should return boolean false for feature false', async () => {
-            const data = { test: false };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: false };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -141,8 +123,7 @@ describe('Underflag', () => {
         });
 
         test('should return number 1 for feature 1', async () => {
-            const data = { test: 1 };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: 1 };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -150,8 +131,7 @@ describe('Underflag', () => {
         });
 
         test('should return number 0 for feature 0', async () => {
-            const data = { test: 0 };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: 0 };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -159,8 +139,7 @@ describe('Underflag', () => {
         });
 
         test('should return string "1" for feature "1"', async () => {
-            const data = { test: "1" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "1" };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -168,8 +147,7 @@ describe('Underflag', () => {
         });
 
         test('should return string "0" for feature "0"', async () => {
-            const data = { test: "0" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "0" };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -177,8 +155,7 @@ describe('Underflag', () => {
         });
 
         test('should return string "on" for feature "on"', async () => {
-            const data = { test: "on" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "on" };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -186,8 +163,7 @@ describe('Underflag', () => {
         });
 
         test('should return string "off" for feature "off"', async () => {
-            const data = { test: "off" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "off" };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -195,8 +171,7 @@ describe('Underflag', () => {
         });
 
         test('should return string "t" for feature "t"', async () => {
-            const data = { test: "t" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "t" };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -204,8 +179,7 @@ describe('Underflag', () => {
         });
 
         test('should return string "f" for feature "f"', async () => {
-            const data = { test: "f" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "f" };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -213,8 +187,7 @@ describe('Underflag', () => {
         });
 
         test('should return string "y" for feature "y"', async () => {
-            const data = { test: "y" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "y" };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -222,8 +195,7 @@ describe('Underflag', () => {
         });
 
         test('should return string "n" for feature "n"', async () => {
-            const data = { test: "n" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "n" };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -231,8 +203,7 @@ describe('Underflag', () => {
         });
 
         test('should return string "yes" for feature "yes"', async () => {
-            const data = { test: "yes" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "yes" };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -240,8 +211,7 @@ describe('Underflag', () => {
         });
 
         test('should return string "no" for feature "no"', async () => {
-            const data = { test: "no" };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: "no" };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -249,8 +219,7 @@ describe('Underflag', () => {
         });
 
         test('should return object null for feature null', async () => {
-            const data = { test: null };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: null };
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -258,8 +227,7 @@ describe('Underflag', () => {
         });
 
         test('should return undefined for feature undefined', async () => {
-            const data = {};
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = {};
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).toBeUndefined();
@@ -268,9 +236,16 @@ describe('Underflag', () => {
 
     describe('Get from provider', () => {
 
-        test('should return from data', async () => {
-            const data = { test: true };
-            const dataProvider = new JsonDataProvider({ data });
+        test('should return from data with implicit json data provider', async () => {
+            const dataProvider = { test: true };
+            const underflag = new Underflag({ dataProvider });
+            const feature = await underflag.get('test');
+            expect(feature).not.toBeUndefined();
+            expect(feature?.origin).toBe(ProviderEnum.Data)
+        });
+
+        test('should return from data with explicit json data provider', async () => {
+            const dataProvider = new JsonDataProvider({ data: { test: true } });
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
@@ -278,8 +253,7 @@ describe('Underflag', () => {
         });
 
         test('should return from cache', async () => {
-            const data = { test: true };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: true };
             class CacheTestProvider implements ICacheProvider {
                 async get(key: string): Promise<CacheModel | undefined> {
                     return { key, value: JSON.stringify(key === 'test') };
@@ -295,8 +269,7 @@ describe('Underflag', () => {
         });
 
         test('should return from memory', async () => {
-            const data = { test: true };
-            const dataProvider = new JsonDataProvider({ data });
+            const dataProvider = { test: true };
             const memoryProvider = new MemoryProvider({ lifetime: 3 });
             const underflag = new Underflag({ dataProvider, memoryProvider });
             await underflag.loadMemory();

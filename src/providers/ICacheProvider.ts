@@ -1,5 +1,13 @@
 import { CacheModel } from "../models";
 
+export function isCacheProvider(object: unknown): object is ICacheProvider {
+    const _object = object as ICacheProvider
+    return _object.get !== undefined
+        && _object.get instanceof Function
+        && _object.set !== undefined
+        && _object.set instanceof Function
+}
+
 export interface ICacheProvider {
     /**
      * Get a feature data

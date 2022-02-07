@@ -1,5 +1,4 @@
 import { Underflag, isOn } from '../../src';
-import { JsonDataProvider } from '../../src/providers';
 import objData from './object.json';
 import arrData from './array.json';
 
@@ -15,8 +14,7 @@ const print = async (underflag: Underflag, key: string) => {
 
 (async () => {
     // use data provider
-    const dataProvider = new JsonDataProvider({ data: arrData });
-    const underflag = new Underflag({ dataProvider });
+    const underflag = new Underflag({ dataProvider: arrData });
 
     // check flags
     const list: any[] = [];

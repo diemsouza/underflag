@@ -2,11 +2,12 @@ import {
     IDataProvider, ICacheProvider, IMemoryProvider,
     DataValueType, ValueModel,
     DataModel, CacheModel, MemoryModel,
-    isOn, isOff, ProviderEnum
+    JsonDataProvider, JSONData,
+    isOn, isOff, ProviderEnum, isDataProvider
 } from ".";
 
-interface UnderflagOptions {
-    dataProvider: IDataProvider
+export interface UnderflagOptions {
+    dataProvider: IDataProvider | JSONData
     cacheProvider?: ICacheProvider
     memoryProvider?: IMemoryProvider
 }
@@ -22,7 +23,13 @@ export class Underflag {
     private memoryProvider?: IMemoryProvider;
 
     constructor(options: UnderflagOptions) {
-        this.dataProvider = options.dataProvider;
+        if (isDataProvider(options.dataProvider)) {
+            this.dataProvider = options.dataProvider;
+        } else {
+            this.dataProvider = new JsonDataProvider({
+                data: options.dataProvider as JSONData
+            });
+        }
         this.cacheProvider = options.cacheProvider;
         this.memoryProvider = options.memoryProvider;
     }

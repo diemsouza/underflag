@@ -1,3 +1,3 @@
-import { ValueType, KeyValueType } from '.';
+import { ValueType, JSONObject } from '.';
 
-export type DataValueType = ValueType | KeyValueType;
+export type DataValueType = ValueType | JSONObject;
