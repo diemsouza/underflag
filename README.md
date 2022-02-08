@@ -109,11 +109,19 @@ const isOn = await underflag.isOn("test_a"); // return true or false
 const isOff = await underflag.isOff("test_a"); // return true or false
 ```
 
-Get the feature data with key, value and origin (memory, cache or data):
+Get a complete feature data:
 
 ```js
 const data = await underflag.get("test_a");
 console.log(data); // return undefined or feature object
+```
+
+Get many complete features data:
+
+```js
+const [test_a, test_b] = await underflag.getMany(["test_a", "test_b"]);
+console.log("test_a", test_a);
+console.log("test_b", test_b);
 ```
 
 Get the feature value:
@@ -121,6 +129,14 @@ Get the feature value:
 ```js
 const value = await underflag.getValue("test_a");
 console.log(data); // return null or feature value
+```
+
+Get the features values:
+
+```js
+const [value_a, value_b] = await underflag.getValues(["test_a", "test_b"]);
+console.log(value_a);
+console.log(value_b);
 ```
 
 ## Using your own data, cache or memory provider implementation

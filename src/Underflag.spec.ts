@@ -103,6 +103,20 @@ describe('Underflag', () => {
 
     describe('Get feature value', () => {
 
+        test('should return one', async () => {
+            const dataProvider = { test: true };
+            const underflag = new Underflag({ dataProvider });
+            const feature = await underflag.getValue('test');
+            expect(feature).not.toBeUndefined();
+        });
+
+        test('should return many', async () => {
+            const dataProvider = { test_a: true, test_b: false };
+            const underflag = new Underflag({ dataProvider });
+            const features = await underflag.getValues(['test_a', 'test_b']);
+            expect(features.length).toEqual(2);
+        });
+
         test('should return boolean true for feature true', async () => {
             const dataProvider = { test: true };
             const underflag = new Underflag({ dataProvider });
@@ -274,6 +288,26 @@ describe('Underflag', () => {
             expect(feature).not.toBeUndefined();
             expect(feature?.origin).toBe(ProviderEnum.Memory)
         });
+    });
+
+    describe('Get feature', () => {
+
+        test('should return one', async () => {
+            const dataProvider = { test: true };
+            const underflag = new Underflag({ dataProvider });
+            const feature = await underflag.get('test');
+            expect(feature).not.toBeUndefined();
+        });
+
+        test('should return many', async () => {
+            const dataProvider = new JsonDataProvider({ data: { test_a: true, test_b: false } });
+            const underflag = new Underflag({ dataProvider });
+            const features = await underflag.getMany(['test_a', 'test_b']);
+            expect(features?.length).toBe(2);
+            expect(features[0]?.key).toBe('test_a');
+            expect(features[1]?.key).toBe('test_b');
+        });
+
     });
 
 });

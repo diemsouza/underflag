@@ -63,17 +63,7 @@ export class Underflag {
     }
 
     /**
-     * Return all features from data
-     * @returns Promise<DataModel[]>
-     */
-    async getAll(): Promise<DataModel[]> {
-        const data = await this.dataProvider.getAll();
-        return data;
-    }
-
-    /**
-     * Load all features from data provider to memory
-     * @returns List of features loaded
+     * Load all features from data provider to memory provider
      */
     async loadMemory(): Promise<DataModel[]> {
         if (!this.memoryProvider) {
@@ -89,8 +79,7 @@ export class Underflag {
     }
 
     /**
-     * Clear memory
-     * @returns void
+     * Clear memory provider
      */
     async flushMemory(): Promise<void> {
         if (!this.memoryProvider) {
@@ -158,6 +147,14 @@ export class Underflag {
     }
 
     /**
+     * Get all features from data provider
+     */
+    async getAll(): Promise<DataModel[]> {
+        const data = await this.dataProvider.getAll();
+        return data;
+    }
+
+    /**
      * Get a feature value by key
      */
     async getValue(key: string, options?: GetOptions): Promise<DataType | undefined> {
@@ -168,7 +165,7 @@ export class Underflag {
     /**
      * Get a list of features by keys
      */
-    async getValueMany(keys: string[], options?: GetOptions): Promise<UnDataType[] | undefined> {
+    async getValues(keys: string[], options?: GetOptions): Promise<UnDataType[]> {
         const results = await this.getMany(keys);
         return results.map(a => a?.value);
     }
