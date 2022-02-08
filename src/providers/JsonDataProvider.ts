@@ -1,6 +1,4 @@
-import { IDataProvider } from '../providers';
-import { DataModel } from '../models';
-import { JSONObject, JSONData } from '../types';
+import { IDataProvider, DataModel, JSONObject, JSONData } from '..';
 
 export interface JsonDataProviderOptions {
     /** Accept a json object or an array of json object */

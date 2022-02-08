@@ -1,4 +1,4 @@
-import { CacheModel } from "../models";
+import { DataModel } from "..";
 
 export function isCacheProvider(object: unknown): object is ICacheProvider {
     const _object = object as ICacheProvider
@@ -10,15 +10,12 @@ export function isCacheProvider(object: unknown): object is ICacheProvider {
 
 export interface ICacheProvider {
     /**
-     * Get a feature data
-     * @param key Unique feature identifier
-     * @returns A CacheModel with value or a undefined value if not found
+     * Get a feature by key or undefined if not found
      */
-    get(key: string): Promise<CacheModel | undefined>
+    get(key: string): Promise<DataModel | undefined>
 
     /**
-     * Set a new value to cache
-     * @param data CacheModel with a unique feature identifier and value
+     * Add a new feature or update if the key already exists
      */
-    set(data: CacheModel): Promise<void>
+    set(data: DataModel): Promise<void>
 }

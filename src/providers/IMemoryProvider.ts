@@ -1,4 +1,4 @@
-import { MemoryModel } from "../models";
+import { DataModel } from "..";
 
 export function isMemoryProvider(object: unknown): object is IMemoryProvider {
     const _object = object as IMemoryProvider
@@ -14,32 +14,27 @@ export function isMemoryProvider(object: unknown): object is IMemoryProvider {
 
 export interface IMemoryProvider {
     /**
-     * Get a feature data
-     * @param key Unique feature identifier
-     * @returns A MemoryModel with value or a undefined value if not found
+     * Get feature by key or undefined if not found
      */
-    get(key: string): Promise<MemoryModel | undefined>
+    get(key: string): Promise<DataModel | undefined>
 
     /**
-     * Set a new value to memory
-     * @param data MemoryModel with a unique feature identifier and value
+     * Add new feature or update if key already exists
      */
-    set(data: MemoryModel): Promise<void>
+    set(data: DataModel): Promise<void>
 
     /**
-     * Get all feature data
-     * @returns A list of MemoryModel
+     * Get all features
      */
-    getAll(): Promise<MemoryModel[]>
+    getAll(): Promise<DataModel[]>
 
     /**
-     * Set a list to memory
-     * @param data List of MemoryModel with a unique feature identifier and value
+     * Add a list of features or update if the keys already exists
      */
-    setAll(data: MemoryModel[]): Promise<void>
+    setAll(data: DataModel[]): Promise<void>
 
     /**
-     * Delete all features from memory
+     * Delete all features
      */
     flushAll(): Promise<void>
 }

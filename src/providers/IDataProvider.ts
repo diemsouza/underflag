@@ -1,4 +1,4 @@
-import { DataModel } from "../models/DataModel";
+import { DataModel } from "..";
 
 export function isDataProvider(object: unknown): object is IDataProvider {
     const _object = object as IDataProvider
@@ -10,15 +10,12 @@ export function isDataProvider(object: unknown): object is IDataProvider {
 
 export interface IDataProvider {
     /**
-     * Get a feature data
-     * @param key Unique feature identifier
-     * @returns A model with valid value (including null) or undefined if key not found
+     * Get a feature by key or undefined if not found
      */
     get(key: string): Promise<DataModel | undefined>
 
     /**
-     * Get all feature data
-     * @returns A list of model with valid value (including null)
+     * Get all features
      */
     getAll(): Promise<DataModel[]>
 }

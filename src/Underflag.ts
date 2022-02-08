@@ -1,9 +1,7 @@
 import {
     IDataProvider, ICacheProvider, IMemoryProvider,
-    DataValueType, ValueModel,
-    DataModel, CacheModel, MemoryModel,
-    JsonDataProvider, JSONData,
-    isOn, isOff, ProviderEnum, isDataProvider
+    JsonDataProvider, JSONData, DataModel,
+    isOn, isOff, ProviderEnum, isDataProvider, DataType
 } from ".";
 
 export interface UnderflagOptions {
@@ -16,6 +14,10 @@ interface GetOptions {
     noCache: boolean,
     noMemory: boolean
 }
+
+type UnDataModel = DataModel | undefined
+
+type UnDataType = DataType | undefined
 
 export class Underflag {
     private dataProvider: IDataProvider;
@@ -34,12 +36,12 @@ export class Underflag {
         this.memoryProvider = options.memoryProvider;
     }
 
-    private async getFromMemory(key: string): Promise<MemoryModel | undefined> {
+    private async getFromMemory(key: string): Promise<DataModel | undefined> {
         if (!this.memoryProvider) return undefined;
         return await this.memoryProvider.get(key);
     }
 
-    private async getFromCache(key: string): Promise<CacheModel | undefined> {
+    private async getFromCache(key: string): Promise<DataModel | undefined> {
         if (!this.cacheProvider) return undefined;
         return await this.cacheProvider.get(key);
     }
@@ -48,13 +50,13 @@ export class Underflag {
         return await this.dataProvider.get(key);
     }
 
-    private async setCache(data: CacheModel): Promise<void> {
+    private async setCache(data: DataModel): Promise<void> {
         if (this.cacheProvider) {
             await this.cacheProvider.set(data);
         }
     }
 
-    private async setMemory(data: MemoryModel): Promise<void> {
+    private async setMemory(data: DataModel): Promise<void> {
         if (this.memoryProvider) {
             await this.memoryProvider.set(data);
         }
@@ -98,12 +100,9 @@ export class Underflag {
     }
 
     /**
-     * Return the feature data
-     * @param key Unique feature identifier
-     * @param options GetOptions 
-     * @returns ValueModel with origin provider, key and value or undefined
+     * Get a feature by key
      */
-    async get(key: string, options?: GetOptions): Promise<ValueModel | undefined> {
+    async get(key: string, options?: GetOptions): Promise<DataModel | undefined> {
         if (!options?.noMemory) {
             const memoryResult = await this.getFromMemory(key);
             if (memoryResult !== undefined) {
@@ -147,36 +146,47 @@ export class Underflag {
     }
 
     /**
-     * Return the feature value
-     * @param key Unique feature identifiers
-     * @param options GetOptions
-     * @returns The DataValueType (alias to any)
+     * Get a list of features by keys
      */
-    async getValue(key: string, options?: GetOptions): Promise<DataValueType | undefined> {
-        const data = await this.get(key, options);
-        return data && data.value;
+    async getMany(keys: string[], options?: GetOptions): Promise<UnDataModel[]> {
+        const list: UnDataModel[] = [];
+        for (const key of keys as string[]) {
+            const result = await this.get(key);
+            list.push(result);
+        }
+        return list;
+    }
+
+    /**
+     * Get a feature value by key
+     */
+    async getValue(key: string, options?: GetOptions): Promise<DataType | undefined> {
+        const result = await this.get(key, options);
+        return result && result.value;
+    }
+
+    /**
+     * Get a list of features by keys
+     */
+    async getValueMany(keys: string[], options?: GetOptions): Promise<UnDataType[] | undefined> {
+        const results = await this.getMany(keys);
+        return results.map(a => a?.value);
     }
 
     /**
      * Return true if feature is on
-     * @param key Unique feature identifier
-     * @param GetOptions
-     * @returns true if value is number 1, boolean true or string '1', 'true', 't', 'on', 'y', 'yes'
      */
     async isOn(key: string, options?: GetOptions): Promise<boolean> {
         const result = await this.get(key, options);
-        return isOn(result?.value);
+        return isOn(result as DataModel);
     }
 
     /**
      * Return true if feature is off
-     * @param key Unique feature identifier
-     * @param GetOptions
-     * @returns true if value is number diff of 1, boolean false or string out of '1', 'true', 't', 'on', 'y', 'yes'
      */
     async isOff(key: string, options?: GetOptions): Promise<boolean> {
         const result = await this.get(key, options);
-        return isOff(result?.value);
+        return isOff(result as DataModel);
     }
 
 };

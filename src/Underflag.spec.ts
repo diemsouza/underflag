@@ -1,7 +1,4 @@
-import { ICacheProvider, JsonDataProvider, MemoryProvider } from '.';
-import Underflag from './Underflag';
-import { ProviderEnum } from './enums'
-import { CacheModel } from './models';
+import { Underflag, ICacheProvider, JsonDataProvider, MemoryProvider, ProviderEnum, DataModel } from '..';
 
 describe('Underflag', () => {
 
@@ -255,10 +252,10 @@ describe('Underflag', () => {
         test('should return from cache', async () => {
             const dataProvider = { test: true };
             class CacheTestProvider implements ICacheProvider {
-                async get(key: string): Promise<CacheModel | undefined> {
+                async get(key: string): Promise<DataModel | undefined> {
                     return { key, value: JSON.stringify(key === 'test') };
                 }
-                async set(data: CacheModel): Promise<void> {
+                async set(data: DataModel): Promise<void> {
                 }
             }
             const cacheProvider = new CacheTestProvider();

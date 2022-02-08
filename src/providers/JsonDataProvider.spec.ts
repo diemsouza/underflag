@@ -1,4 +1,4 @@
-import { Underflag, JsonDataProvider } from '../';
+import { Underflag, JsonDataProvider } from '..';
 
 describe('Data Provider', () => {
     describe('Json', () => {

@@ -1,5 +1,4 @@
-import { IMemoryProvider } from './';
-import { MemoryModel } from './../models'
+import { IMemoryProvider, DataModel } from '..'
 
 export interface MemoryProviderOptions {
     /** Lifetime (in seconds) of each feature in memory */
@@ -9,7 +8,7 @@ export interface MemoryProviderOptions {
 }
 
 export class MemoryProvider implements IMemoryProvider {
-    private data: MemoryModel[] = [];
+    private data: DataModel[] = [];
     private lifetime: number;
     private limit?: number;
 
@@ -25,14 +24,14 @@ export class MemoryProvider implements IMemoryProvider {
         }
     }
 
-    async get(key: string): Promise<MemoryModel | undefined> {
+    async get(key: string): Promise<DataModel | undefined> {
         if (!this.data.length) return undefined;
         this.expire();
         const item = this.data.find(a => a.key === key);
         return item ? item : undefined;
     }
 
-    async set(data: MemoryModel): Promise<void> {
+    async set(data: DataModel): Promise<void> {
         if (!this.lifetime) return;
         data.expireAt = Date.now() + this.lifetime * 1000;
         this.data.push(data);
@@ -41,12 +40,12 @@ export class MemoryProvider implements IMemoryProvider {
         }
     }
 
-    async getAll(): Promise<MemoryModel[]> {
+    async getAll(): Promise<DataModel[]> {
         this.expire();
         return this.data;
     }
 
-    async setAll(data: MemoryModel[]): Promise<void> {
+    async setAll(data: DataModel[]): Promise<void> {
         if (!this.lifetime) return;
         const expireAt = Date.now() + this.lifetime * 1000;
         this.data = (this.limit && data.length > this.limit
