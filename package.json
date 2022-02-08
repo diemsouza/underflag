@@ -22,7 +22,7 @@
     "remote config"
   ],
   "author": "Diego Souza",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dieg0s0uza/underflag/issues"
   },
