@@ -1,4 +1,4 @@
-import { Underflag, ICacheProvider, JsonDataProvider, MemoryProvider, ProviderEnum, DataModel } from '..';
+import { Underflag, ICacheProvider, JsonDataProvider, MemoryProvider, Origin, Feature } from '..';
 
 describe('Underflag', () => {
 
@@ -252,7 +252,7 @@ describe('Underflag', () => {
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
-            expect(feature?.origin).toBe(ProviderEnum.Data)
+            expect(feature?.origin).toBe(Origin.Data)
         });
 
         test('should return from data with explicit json data provider', async () => {
@@ -260,23 +260,23 @@ describe('Underflag', () => {
             const underflag = new Underflag({ dataProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
-            expect(feature?.origin).toBe(ProviderEnum.Data)
+            expect(feature?.origin).toBe(Origin.Data)
         });
 
         test('should return from cache', async () => {
             const dataProvider = { test: true };
             class CacheTestProvider implements ICacheProvider {
-                async get(key: string): Promise<DataModel | undefined> {
+                async get(key: string): Promise<Feature | undefined> {
                     return { key, value: JSON.stringify(key === 'test') };
                 }
-                async set(data: DataModel): Promise<void> {
+                async set(data: Feature): Promise<void> {
                 }
             }
             const cacheProvider = new CacheTestProvider();
             const underflag = new Underflag({ dataProvider, cacheProvider });
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
-            expect(feature?.origin).toBe(ProviderEnum.Cache)
+            expect(feature?.origin).toBe(Origin.Cache)
         });
 
         test('should return from memory', async () => {
@@ -286,7 +286,7 @@ describe('Underflag', () => {
             await underflag.loadMemory();
             const feature = await underflag.get('test');
             expect(feature).not.toBeUndefined();
-            expect(feature?.origin).toBe(ProviderEnum.Memory)
+            expect(feature?.origin).toBe(Origin.Memory)
         });
     });
 

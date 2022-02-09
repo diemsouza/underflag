@@ -3,7 +3,7 @@ import { JsonDataProvider, MemoryProvider } from '../../src/providers';
 import objData from '../json/object.json';
 
 const print = async (underflag: Underflag, key: string) => {
-    const data = await underflag.get(key);
+    const data = await underflag.getFeature(key);
     return {
         key,
         status: isOn(data) ? 'on' : 'off',

@@ -1,23 +1,23 @@
-export type ValueType = boolean | number | string | null;
+export type Primitive = string | number | boolean | null;
 
 export type JSONObject = {
-    [x: string]: ValueType | ValueType[] | JSONObject | JSONObject[] | undefined
+    [x: string]: Primitive | Primitive[] | JSONObject | JSONObject[] | undefined
 }
 
 export type JSONData = JSONObject | JSONObject[];
 
-export type DataType = ValueType | JSONObject;
+export type Flag = Primitive | JSONObject;
 
-export enum ProviderEnum {
+export enum Origin {
     Data = 'data',
     Cache = 'cache',
     Memory = 'memory'
 };
 
-export interface DataModel {
+export interface Feature {
     key: string;
-    value: DataType;
+    value?: Flag;
     description?: string;
     expireAt?: number;
-    readonly origin?: ProviderEnum;
+    readonly origin?: Origin;
 }

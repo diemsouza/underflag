@@ -3,12 +3,12 @@ import objData from './object.json';
 import arrData from './array.json';
 
 const print = async (underflag: Underflag, key: string) => {
-    const data = await underflag.get(key);
+    const data = await underflag.getFeature(key);
     return {
         key,
         status: isOn(data) ? 'on' : 'off',
-        value: data && data.value,
-        origin: data && data.origin
+        value: data?.value,
+        origin: data?.origin
     };
 };
 

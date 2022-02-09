@@ -1,4 +1,4 @@
-import { DataModel } from "..";
+import { Feature } from "..";
 
 export function isMemoryProvider(object: unknown): object is IMemoryProvider {
     const _object = object as IMemoryProvider
@@ -16,22 +16,22 @@ export interface IMemoryProvider {
     /**
      * Get feature by key or undefined if not found
      */
-    get(key: string): Promise<DataModel | undefined>
+    get(key: string): Promise<Feature | undefined>
 
     /**
      * Add new feature or update if key already exists
      */
-    set(data: DataModel): Promise<void>
+    set(data: Feature): Promise<void>
 
     /**
      * Get all features
      */
-    getAll(): Promise<DataModel[]>
+    getAll(): Promise<Feature[]>
 
     /**
      * Add a list of features or update if the keys already exists
      */
-    setAll(data: DataModel[]): Promise<void>
+    setAll(data: Feature[]): Promise<void>
 
     /**
      * Delete all features

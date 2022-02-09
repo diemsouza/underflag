@@ -1,4 +1,4 @@
-import { Underflag, JsonDataProvider, MemoryProvider, ProviderEnum } from '..';
+import { Underflag, JsonDataProvider, MemoryProvider, Origin } from '..';
 
 describe('Data Provider', () => {
     describe('Memory', () => {
@@ -9,9 +9,9 @@ describe('Data Provider', () => {
         test('should return from memory', async () => {
             const underflag = new Underflag({ dataProvider, memoryProvider });
             await underflag.loadMemory();
-            const feature = await underflag.get('test_a');
+            const feature = await underflag.getFeature('test_a');
             expect(feature).not.toBeUndefined();
-            expect(feature?.origin).toBe(ProviderEnum.Memory)
+            expect(feature?.origin).toBe(Origin.Memory)
         });
 
         test('should return feature test_a on', async () => {
@@ -29,7 +29,7 @@ describe('Data Provider', () => {
         test('should return two features', async () => {
             const underflag = new Underflag({ dataProvider, memoryProvider });
             await underflag.loadMemory();
-            const res = await underflag.getAll();
+            const res = await underflag.getAllFeatures();
             expect(res).toBeInstanceOf(Array);
             expect(res.length).toEqual(2);
         });
