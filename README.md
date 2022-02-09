@@ -109,34 +109,34 @@ const isOn = await underflag.isOn("test_a"); // return true or false
 const isOff = await underflag.isOff("test_a"); // return true or false
 ```
 
-Get a complete feature data:
+Get a feature:
 
 ```js
-const data = await underflag.get("test_a");
-console.log(data); // return undefined or feature object
+const test_a = await underflag.getFeature("test_a");
+console.log(test_a); // return undefined or feature object
 ```
 
-Get many complete features data:
+Get a list of features:
 
 ```js
-const [test_a, test_b] = await underflag.getMany(["test_a", "test_b"]);
+const [test_a, test_b] = await underflag.getFeatures(["test_a", "test_b"]);
 console.log("test_a", test_a);
 console.log("test_b", test_b);
 ```
 
-Get the feature value:
+Get a feature flag:
 
 ```js
-const value = await underflag.getValue("test_a");
-console.log(data); // return null or feature value
+const test_a = await underflag.getFlag("test_a");
+console.log(test_a);
 ```
 
-Get the features values:
+Get a list of features:
 
 ```js
-const [value_a, value_b] = await underflag.getValues(["test_a", "test_b"]);
-console.log(value_a);
-console.log(value_b);
+const [test_a, test_b] = await underflag.getFlags(["test_a", "test_b"]);
+console.log(test_a);
+console.log(test_b);
 ```
 
 ## Using your own data, cache or memory provider implementation
