@@ -14,10 +14,14 @@ export enum Origin {
     Memory = 'memory'
 };
 
-export interface Feature {
+export interface BaseFeature {
     key: string;
     value?: Flag;
     description?: string;
     expireAt?: number;
     readonly origin?: Origin;
+}
+
+export interface Feature extends BaseFeature {
+    isOn: () => boolean;
 }

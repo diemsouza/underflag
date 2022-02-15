@@ -1,4 +1,4 @@
-import { IMemoryProvider, Feature } from '..'
+import { IMemoryProvider, BaseFeature } from '..'
 
 export interface MemoryProviderOptions {
     /** Lifetime (in seconds) of each feature in memory */
@@ -8,7 +8,7 @@ export interface MemoryProviderOptions {
 }
 
 export class MemoryProvider implements IMemoryProvider {
-    private data: Feature[] = [];
+    private data: BaseFeature[] = [];
     private lifetime: number;
     private limit?: number;
 
@@ -24,14 +24,14 @@ export class MemoryProvider implements IMemoryProvider {
         }
     }
 
-    async get(key: string): Promise<Feature | undefined> {
+    async get(key: string): Promise<BaseFeature | undefined> {
         if (!this.data.length) return undefined;
         this.expire();
         const item = this.data.find(a => a.key === key);
         return item ? item : undefined;
     }
 
-    async set(data: Feature): Promise<void> {
+    async set(data: BaseFeature): Promise<void> {
         if (!this.lifetime) return;
         data.expireAt = Date.now() + this.lifetime * 1000;
         this.data.push(data);
@@ -40,12 +40,12 @@ export class MemoryProvider implements IMemoryProvider {
         }
     }
 
-    async getAll(): Promise<Feature[]> {
+    async getAll(): Promise<BaseFeature[]> {
         this.expire();
         return this.data;
     }
 
-    async setAll(data: Feature[]): Promise<void> {
+    async setAll(data: BaseFeature[]): Promise<void> {
         if (!this.lifetime) return;
         const expireAt = Date.now() + this.lifetime * 1000;
         this.data = (this.limit && data.length > this.limit

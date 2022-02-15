@@ -1,4 +1,4 @@
-import { Feature } from "..";
+import { BaseFeature } from "..";
 
 export function isMemoryProvider(object: unknown): object is IMemoryProvider {
     const _object = object as IMemoryProvider
@@ -16,22 +16,22 @@ export interface IMemoryProvider {
     /**
      * Get feature by key or undefined if not found
      */
-    get(key: string): Promise<Feature | undefined>
+    get(key: string): Promise<BaseFeature | undefined>
 
     /**
      * Add new feature or update if key already exists
      */
-    set(data: Feature): Promise<void>
+    set(data: BaseFeature): Promise<void>
 
     /**
      * Get all features
      */
-    getAll(): Promise<Feature[]>
+    getAll(): Promise<BaseFeature[]>
 
     /**
      * Add a list of features or update if the keys already exists
      */
-    setAll(data: Feature[]): Promise<void>
+    setAll(data: BaseFeature[]): Promise<void>
 
     /**
      * Delete all features

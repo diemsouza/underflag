@@ -1,4 +1,4 @@
-import { Underflag, isOn } from '../../src';
+import { Underflag } from '../../src';
 import objData from './object.json';
 import arrData from './array.json';
 
@@ -6,7 +6,7 @@ const print = async (underflag: Underflag, key: string) => {
     const data = await underflag.getFeature(key);
     return {
         key,
-        status: isOn(data) ? 'on' : 'off',
+        status: data?.isOn() ? 'on' : 'off',
         value: data?.value,
         origin: data?.origin
     };

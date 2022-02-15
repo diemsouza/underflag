@@ -1,6 +1,6 @@
 import {
     IDataProvider, ICacheProvider, IMemoryProvider,
-    JsonDataProvider, JSONData, Feature,
+    JsonDataProvider, JSONData, BaseFeature, Feature,
     isOn, isOff, Origin, isDataProvider, Flag
 } from ".";
 
@@ -36,27 +36,27 @@ export class Underflag {
         this.memoryProvider = options.memoryProvider;
     }
 
-    private async getFromMemory(key: string): Promise<Feature | undefined> {
+    private async getFromMemory(key: string): Promise<BaseFeature | undefined> {
         if (!this.memoryProvider) return undefined;
         return await this.memoryProvider.get(key);
     }
 
-    private async getFromCache(key: string): Promise<Feature | undefined> {
+    private async getFromCache(key: string): Promise<BaseFeature | undefined> {
         if (!this.cacheProvider) return undefined;
         return await this.cacheProvider.get(key);
     }
 
-    private async getFromData(key: string): Promise<Feature | undefined> {
+    private async getFromData(key: string): Promise<BaseFeature | undefined> {
         return await this.dataProvider.get(key);
     }
 
-    private async setCache(data: Feature): Promise<void> {
+    private async setCache(data: BaseFeature): Promise<void> {
         if (this.cacheProvider) {
             await this.cacheProvider.set(data);
         }
     }
 
-    private async setMemory(data: Feature): Promise<void> {
+    private async setMemory(data: BaseFeature): Promise<void> {
         if (this.memoryProvider) {
             await this.memoryProvider.set(data);
         }
@@ -98,7 +98,8 @@ export class Underflag {
                     key,
                     value: memoryResult.value,
                     description: memoryResult.description,
-                    origin: Origin.Memory
+                    origin: Origin.Memory,
+                    isOn: () => isOn(memoryResult)
                 };
             }
         }
@@ -111,7 +112,8 @@ export class Underflag {
                     key,
                     value: cacheResult.value,
                     description: cacheResult.description,
-                    origin: Origin.Cache
+                    origin: Origin.Cache,
+                    isOn: () => isOn(cacheResult)
                 };
             }
         }
@@ -128,7 +130,8 @@ export class Underflag {
                 key,
                 value: dataResult.value,
                 description: dataResult.description,
-                origin: Origin.Data
+                origin: Origin.Data,
+                isOn: () => isOn(dataResult)
             };
         }
         return undefined;
@@ -150,7 +153,11 @@ export class Underflag {
      * Get all features from data provider
      */
     async getAllFeatures(): Promise<Feature[]> {
-        return await this.dataProvider.getAll();
+        const features = await this.dataProvider.getAll();
+        return features.map(a => ({
+            ...a,
+            isOn: () => isOn(a)
+        }))
     }
 
     /**
@@ -174,7 +181,7 @@ export class Underflag {
      */
     async isOn(key: string, options?: GetOptions): Promise<boolean> {
         const result = await this.getFeature(key, options);
-        return isOn(result as Feature);
+        return isOn(result);
     }
 
     /**
@@ -182,7 +189,7 @@ export class Underflag {
      */
     async isOff(key: string, options?: GetOptions): Promise<boolean> {
         const result = await this.getFeature(key, options);
-        return isOff(result as Feature);
+        return isOff(result);
     }
 
 };

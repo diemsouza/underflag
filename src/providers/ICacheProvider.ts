@@ -1,4 +1,4 @@
-import { Feature } from "..";
+import { BaseFeature } from "..";
 
 export function isCacheProvider(object: unknown): object is ICacheProvider {
     const _object = object as ICacheProvider
@@ -12,10 +12,10 @@ export interface ICacheProvider {
     /**
      * Get a feature by key or undefined if not found
      */
-    get(key: string): Promise<Feature | undefined>
+    get(key: string): Promise<BaseFeature | undefined>
 
     /**
      * Add a new feature or update if the key already exists
      */
-    set(data: Feature): Promise<void>
+    set(data: BaseFeature): Promise<void>
 }

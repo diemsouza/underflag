@@ -37,7 +37,7 @@ _Using implicit json data provider_
 ```js
 import { Underflag } from "underflag";
 
-const data = { test_a: true, test_b: false };
+const data = { test_a: true };
 const underflag = new Underflag({ dataProvider: data });
 
 if (await underflag.isOn("test_a")) {
@@ -106,7 +106,6 @@ Check the feature status:
 
 ```js
 const isOn = await underflag.isOn("test_a"); // return true or false
-const isOff = await underflag.isOff("test_a"); // return true or false
 ```
 
 Get a feature:
