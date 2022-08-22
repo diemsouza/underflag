@@ -1,0 +1,26 @@
+{
+    "data": 
+    {
+        "test_a": true,
+        "test_b": false,
+        "test_c": 1,
+        "test_d": 0,
+        "test_e": "true",
+        "test_f": "false",
+        "test_g": "1",
+        "test_h": "0",
+        "test_i": "on",
+        "test_j": "off",
+        "test_k": "t",
+        "test_l": "f",
+        "test_m": "y",
+        "test_n": "n",
+        "test_o": "yes",
+        "test_p": "no",
+        "test_q": {
+            "q1": 1,
+            "q2": 2
+        },
+        "test_r": null
+    }
+}

@@ -3,6 +3,8 @@ import {
     JsonDataProvider, JSONData, BaseFeature, Feature,
     isOn, isOff, Origin, isDataProvider, Flag
 } from ".";
+import Debug from "debug";
+const debug = Debug("underflag");
 
 export interface UnderflagOptions {
     dataProvider: IDataProvider | JSONData
@@ -32,32 +34,44 @@ export class Underflag {
                 data: options.dataProvider as JSONData
             });
         }
+        debug("data provider defined");
         this.cacheProvider = options.cacheProvider;
+        if (this.cacheProvider) {
+            debug("cache provider defined");
+        }
         this.memoryProvider = options.memoryProvider;
+        if (this.memoryProvider) {
+            debug("memory provider defined");
+        }
     }
 
     private async getFromMemory(key: string): Promise<BaseFeature | undefined> {
         if (!this.memoryProvider) return undefined;
+        debug(`getting feature ${key} from memory`);
         return await this.memoryProvider.get(key);
     }
 
     private async getFromCache(key: string): Promise<BaseFeature | undefined> {
         if (!this.cacheProvider) return undefined;
+        debug(`getting feature ${key} from cache`);
         return await this.cacheProvider.get(key);
     }
 
     private async getFromData(key: string): Promise<BaseFeature | undefined> {
+        debug(`getting feature ${key} from data`);
         return await this.dataProvider.get(key);
     }
 
     private async setCache(data: BaseFeature): Promise<void> {
         if (this.cacheProvider) {
+            debug(`setting feature ${data.key} to cache`);
             await this.cacheProvider.set(data);
         }
     }
 
     private async setMemory(data: BaseFeature): Promise<void> {
         if (this.memoryProvider) {
+            debug(`setting feature ${data.key} to memory`);
             await this.memoryProvider.set(data);
         }
     }
@@ -70,6 +84,7 @@ export class Underflag {
             throw new Error("Memory provider not found");
         }
         const data = await this.dataProvider.getAll();
+        debug(`loading all features (${data.length}) from data to memory`);
         this.memoryProvider.setAll(data.map(a => ({
             key: a.key,
             value: a.value,
@@ -84,6 +99,7 @@ export class Underflag {
         if (!this.memoryProvider) {
             throw new Error("Memory provider not found");
         }
+        debug("flusing memory");
         return this.memoryProvider.flushAll();
     }
 
@@ -142,6 +158,7 @@ export class Underflag {
      */
     async getFeatures(keys: string[], options?: GetOptions): Promise<UnFeature[]> {
         const list: UnFeature[] = [];
+        debug(`getting features ${keys.join(", ")}`);
         for (const key of keys as string[]) {
             const result = await this.getFeature(key, options);
             list.push(result);
@@ -153,9 +170,13 @@ export class Underflag {
      * Get all features from data provider
      */
     async getAllFeatures(): Promise<Feature[]> {
+        debug('getting all features from data');
         const features = await this.dataProvider.getAll();
         return features.map(a => ({
-            ...a,
+            key: a.key,
+            value: a.value,
+            description: a.description,
+            origin: Origin.Data,
             isOn: () => isOn(a)
         }))
     }
@@ -164,6 +185,7 @@ export class Underflag {
      * Get a feature flag by key
      */
     async getFlag(key: string, options?: GetOptions): Promise<Flag | undefined> {
+        debug(`getting feature flag ${key}`);
         const feature = await this.getFeature(key, options);
         return feature && feature.value;
     }
@@ -172,6 +194,7 @@ export class Underflag {
      * Get a list of feature flag by keys
      */
     async getFlags(keys: string[], options?: GetOptions): Promise<UnFlag[]> {
+        debug(`getting features flags ${keys.join(", ")}`);
         const results = await this.getFeatures(keys, options);
         return results.map(a => a?.value);
     }
@@ -180,6 +203,7 @@ export class Underflag {
      * Return true if feature is on
      */
     async isOn(key: string, options?: GetOptions): Promise<boolean> {
+        debug(`checking if feature ${key} is on`);
         const result = await this.getFeature(key, options);
         return isOn(result);
     }
@@ -188,6 +212,7 @@ export class Underflag {
      * Return true if feature is off
      */
     async isOff(key: string, options?: GetOptions): Promise<boolean> {
+        debug(`checking if feature ${key} is off`);
         const result = await this.getFeature(key, options);
         return isOff(result);
     }

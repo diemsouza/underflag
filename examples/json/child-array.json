@@ -1,0 +1,88 @@
+{
+    "data": 
+    [
+        {
+            "key": "test_a",
+            "value": true,
+            "description": "The description is optional"
+        },
+        {
+            "key": "test_b",
+            "value": false
+        },
+        {
+            "key": "test_c",
+            "value": 1
+        },
+        {
+            "key": "test_d",
+            "value": 0
+        },
+        {
+            "key": "test_e",
+            "value": "true"
+        },
+        {
+            "key": "test_f",
+            "value": "false"
+        },
+        {
+            "key": "test_g",
+            "value": "1"
+        },
+        {
+            "key": "test_h",
+            "value": "0"
+        },
+        {
+            "key": "test_i",
+            "value": "on"
+        },
+        {
+            "key": "test_j",
+            "value": "off"
+        },
+        {
+            "key": "test_k",
+            "value": "t"
+        },
+        {
+            "key": "test_l",
+            "value": "f"
+        },
+        {
+            "key": "test_m",
+            "value": "y"
+        },
+        {
+            "key": "test_n",
+            "value": "n"
+        },
+        {
+            "key": "test_o",
+            "value": "yes"
+        },
+        {
+            "key": "test_p",
+            "value": "no"
+        },
+        {
+            "key": "test_q",
+            "value": {
+                "q1": 1,
+                "q2": 2
+            }
+        },
+        {
+            "key": "test_r",
+            "value": [
+                1,
+                2
+            ]
+        },
+        {
+            "key": "test_s",
+            "value": null
+        }
+    ]
+}
