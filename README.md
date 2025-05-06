@@ -1,6 +1,10 @@
 
 # underflag
 
+> ⚠️ This project is a **monorepo**. The individual packages (like `underflag-client`, `underflag-server`, etc.) have been **archived** on GitHub purely for visual organization.  
+> All packages remain fully functional and available via **NPM**.  
+> Please refer to this main repository for documentation, updates, and usage.
+
 This is a node **Feature Flag (Feature Toggle)** module with common data/cache providers like json, mongodb, mysql, redis and others.
 
 If you need more flexibility in your apps, like enable/disable features in production without change environments to deploy manualy or rerun the pipeline, this module is pretty good for you and your team.
